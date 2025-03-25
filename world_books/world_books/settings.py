@@ -10,12 +10,11 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
-from pathlib import Path
 import os
-import dj_database_url 
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 # Quick-start development settings - unsuitable for production
@@ -27,21 +26,21 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'cg#p$g+j9tax!#a3cup@1$8obt2_+&
 
 # SECURITY WARNING: don't run with debug turned on in production!
 #DEBUG = True
-DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
+DEBUG = False #bool(os.environ.get('DJANGO_DEBUG', True))
 ALLOWED_HOSTS = ['*']
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    'catalog',
+    'world_books.catalog',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
+
 ]
 
 MIDDLEWARE = [
@@ -55,7 +54,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'world_books.urls'
+ROOT_URLCONF = 'world_books.world_books.urls'
 
 TEMPLATE_DIR = os.path.join(BASE_DIR, "templates")
 
@@ -134,17 +133,17 @@ LOGIN_REDIRECT_URL = '/'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-# Heroku: Обновление конфигурации базы данных из $DATABASE_URL. 
-db_from_env = dj_database_url.config(conn_max_age=500) 
+# Heroku: Обновление конфигурации базы данных из $DATABASE_URL.
+db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
 
-# Статичные файлы (CSS, JavaScript, Images) 
-# https://docs.djangoproject.com/en/1.10/howto/static-files/ 
-# Абсолютный путь к каталогу, в котором collectstatic 
-# будет собирать статические файлы для развертывания. 
+# Статичные файлы (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/1.10/howto/static-files/
+# Абсолютный путь к каталогу, в котором collectstatic
+# будет собирать статические файлы для развертывания.
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
- 
-# Упрощённая обработка статическая файлов. 
-#https://warehouse.python.org/project/whitenoise/ 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage' 
+
+# Упрощённая обработка статическая файлов.
+#https://warehouse.python.org/project/whitenoise/
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'

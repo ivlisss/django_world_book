@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path, re_path
-from catalog import views
+from world_books.catalog import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -33,5 +33,5 @@ urlpatterns = [
     path(r'^book/create/$', views.BookCreate.as_view(), name='book_create'),
     re_path(r'^book/update/(?P<pk>\d+)$', views.BookUpdate.as_view(), name='book_update'),
     re_path(r'^book/delete/(?P<pk>\d+)$', views.BookDelete.as_view(), name='book_delete'),
-]   
+]
 
